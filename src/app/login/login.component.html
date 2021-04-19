@@ -1,0 +1,22 @@
+<mat-grid-list cols="1" rowHeight="500px">
+    <mat-grid-tile>
+        <div class="example-container">
+            <h1>Login</h1>
+
+            <mat-form-field appearance="fill" class="width-100">
+                <mat-label>Email address</mat-label>
+                <input [(ngModel)]='username' matInput>
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="fill" class="width-100">
+                <mat-label>Enter password</mat-label>
+                <input [(ngModel)]='password' matInput [type]="hide ? 'password' : 'text'">
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+            </mat-form-field>
+            <br>
+            <button type="submit" mat-raised-button value='Login' (click)='login()'>Login</button>
+        </div>
+    </mat-grid-tile>
+</mat-grid-list>

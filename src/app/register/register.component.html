@@ -1,0 +1,47 @@
+<mat-grid-list cols="1" rowHeight="500px">
+    <mat-grid-tile>
+        <div class="example-container">
+            <h1>Register</h1>
+
+            <mat-form-field appearance="fill" class="width-50">
+                <mat-label>First Name</mat-label>
+                <input [(ngModel)]='firstName' matInput>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="width-50 ml-2">
+                <mat-label>Last Name</mat-label>
+                <input [(ngModel)]='lastName' matInput>
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="fill" class="width-100">
+                <mat-label>Email address</mat-label>
+                <input [(ngModel)]='username' matInput>
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="fill" class="width-100">
+                <mat-label>Enter password</mat-label>
+                <input [(ngModel)]='password' matInput [type]="hide ? 'password' : 'text'">
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="fill" class="width-100">
+                <mat-label>Confirm password</mat-label>
+                <input [(ngModel)]='confirmPassword' matInput [type]="hide ? 'password' : 'text'">
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+            </mat-form-field>
+            <br>
+            <button type="submit" mat-raised-button value='Register' (click)='register()'>Register</button>
+        </div>
+    </mat-grid-tile>
+</mat-grid-list>
+
+
+
+<!-- Register name: <input type='text' [(ngModel)]='username' /><br/> Password: <input type='text' [(ngModel)]='password' /><br/>
+<input type='button' value='login' (click)='login()' />
+<br/><br/> Token: {{token}}<br/> Message: {{message}}
+<br/><br/> -->

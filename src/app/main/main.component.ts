@@ -1,15 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { ApiService } from '../ApiService';
+import { ApiService } from '../../ApiService';
 import { Router } from '@angular/router';
 
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'app-main',
+  templateUrl: './main.component.html',
+  styleUrls: ['./main.component.css']
 })
-export class AppComponent {
+export class MainComponent implements OnInit {
   _apiService: ApiService;
   public site = 'https://localhost:5001/api';
   password = '';
@@ -30,9 +30,11 @@ export class AppComponent {
   msgFromServer: string = '';
 
   constructor(private http: HttpClient, private router: Router) {
-    // Pass in http module and pointer to AppComponent.
     this._apiService = new ApiService(http, this);
-    this.showContentIfLoggedIn();
+    this.getSecureData();
+  }
+
+  ngOnInit(): void {
   }
 
 
@@ -51,40 +53,37 @@ export class AppComponent {
     }
   }
 
+  getAttendEvent(eventId) {
+    var url = this.site + '/Event/AttendEvent?EventId=' + eventId;
+
+    // Passing in the reference to the callback function.
+    this._apiService.getData(url, this.attendEventCallback);
+  }
+
+  // Callback needs a pointer '_this' to current instance.
+  attendEventCallback(result, _this) {
+    if (result.errorMessage == "") {
+      alert(JSON.stringify(result));
+    }
+    else {
+      _this.router.navigate(['/login']);
+      alert(JSON.stringify(result.errorMessage));
+    }
+  }
 
   getSecureData() {
-    var url = this.site + '/list'
+    var url = this.site + '/event'
 
     // Passing in the reference to the callback function.
     this._apiService.getData(url, this.secureDataCallback);
   }
 
-
   // Callback needs a pointer '_this' to current instance.
   secureDataCallback(result, _this) {
     if (result.errorMessage == "") {
-      _this.secureData = JSON.stringify(result);
-    }
-    else {
-      alert(JSON.stringify(result.errorMessage));
-    }
-  }
+      _this.secureData = result;
+      console.log(_this.secureData);
 
-  postSecureEvent() {
-    let dataObject = {
-      "date": "2021-04-19T02:06:25.530Z",
-      "time": "18:00",
-      "eventName": "new event",
-      "description": "coolest event",
-      "eventAttendee": []
-    };
-    this._apiService.postData('Event', dataObject,
-      this.securePostCallback);
-  }
-  // Callback needs a pointer '_this' to current instance.
-  securePostCallback(result, _this) {
-    if (result.errorMessage == '') {
-      _this.msgFromServer = result['msgFromServer'];
     }
     else {
       alert(JSON.stringify(result.errorMessage));

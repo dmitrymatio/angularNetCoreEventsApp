@@ -1,0 +1,21 @@
+<mat-toolbar class='navbar' color='primary'>
+    <div>Eventify</div>
+
+    <div [ngSwitch]="userRole">
+        <div *ngSwitchCase="'Admin'">
+            <a mat-button routerLink="/manage" routerLinkActive="mat-raised-button">EventsManager</a>
+            <button mat-button (click)='logout()'>LogOut ({{firstName}})</button>
+        </div>
+        <div *ngSwitchCase="'Attendee'">
+            <a mat-button routerLink="/main" routerLinkActive="mat-raised-button">Main</a>
+            <a mat-button routerLink="/myevents" routerLinkActive="mat-raised-button">MyEvents</a>
+            <button mat-button (click)='logout()'>LogOut ({{firstName}})</button>
+        </div>
+        <div *ngSwitchDefault>
+            <a mat-button routerLink="/main" routerLinkActive="mat-raised-button">Main</a>
+            <a mat-button routerLink="/register" routerLinkActive="mat-raised-button">Register</a>
+            <a mat-button routerLink="/login" routerLinkActive="mat-raised-button">Login</a>
+        </div>
+    </div>
+
+</mat-toolbar>

@@ -1,0 +1,27 @@
+<mat-grid-list cols="1" rowHeight="150px">
+    <mat-grid-tile>
+        <mat-card class="example-card">
+            <mat-card-header>
+                <mat-card-title>Event Name: {{event.eventName}}</mat-card-title>
+                <mat-card-subtitle>Time: {{event.time}}</mat-card-subtitle>
+                <mat-card-subtitle>Date: {{event.date | date:'mediumDate'}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <p>
+                    {{event.description}}
+                </p>
+            </mat-card-content>
+        </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <h1>Attendees:</h1>
+    </mat-grid-tile>
+    <mat-grid-tile *ngFor="let attendee of attendees">
+        <mat-card class="example-card">
+            <mat-card-header>
+                <mat-card-title>{{attendee.firstName}}</mat-card-title>
+                <mat-card-subtitle>{{attendee.lastName}}</mat-card-subtitle>
+            </mat-card-header>
+        </mat-card>
+    </mat-grid-tile>
+</mat-grid-list>

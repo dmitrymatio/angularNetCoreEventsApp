@@ -1,0 +1,26 @@
+<mat-grid-list cols="1" rowHeight="250px">
+    <mat-grid-tile>
+        <div>
+            <h1>Manage Events Here</h1>
+            <a mat-raised-button routerLink="/newevent" routerLinkActive="mat-raised-button">Create Event</a>
+        </div>
+    </mat-grid-tile>
+    <mat-grid-tile *ngFor="let event of secureData['eventArray']">
+        <mat-card class="example-card">
+            <mat-card-header>
+                <mat-card-title>Event Name: {{event.eventName}}</mat-card-title>
+                <mat-card-subtitle>Time: {{event.time}}</mat-card-subtitle>
+                <mat-card-subtitle>Date: {{event.date | date:'mediumDate'}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <p>
+                    {{event.description}}
+                </p>
+            </mat-card-content>
+            <mat-card-actions>
+                <a mat-raised-button routerLink="/attendees/{{event.id}}" routerLinkActive="mat-raised-button">View Attendees</a>
+                <button mat-stroked-button (click)="getDeleteEvent(event.id)">Delete</button>
+            </mat-card-actions>
+        </mat-card>
+    </mat-grid-tile>
+</mat-grid-list>
